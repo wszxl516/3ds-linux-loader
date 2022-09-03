@@ -1,6 +1,11 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <linux.h>
+#include <string.h>
+#ifdef __LOGO__
+    #include "splash.h"
+#endif
+
 //Common data types
 typedef uint8_t u8;
 typedef uint16_t u16;
@@ -81,3 +86,13 @@ typedef volatile u64 vu64;
 #define TOP_FB_RIGHT2         (TOP_FB_RIGHT1 + TOP_FB_SIZE)
 #define BOT_FB_1              (TOP_FB_RIGHT2 + TOP_FB_SIZE)
 #define BOT_FB_2              (BOT_FB_1      + BOT_FB_SIZE)
+extern void waitcycles(u32 us);
+inline void delay(u32 ms){waitcycles(ms * 1000);}
+#define clear_screen() \
+    do { \
+        memset((void*)TOP_FB_LEFT1, 0, TOP_FB_SIZE);\
+        memset((void*)TOP_FB_RIGHT1, 0, TOP_FB_SIZE);\
+        memset((void*)BOT_FB_1, 0, BOT_FB_SIZE);\
+    }while(0)
+
+#define draw_splash() do{ memcpy((void*)TOP_FB_LEFT1, splash_bin, splash_len); delay(1000);}while(0)

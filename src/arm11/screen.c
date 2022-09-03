@@ -1,11 +1,14 @@
 #include "screen.h"
 
-
 void init_screens(void)
 {
 	//Map Framebuffers
     //Top screen
     //left
+    clear_screen();
+    #ifdef __LOGO__
+        draw_splash();
+    #endif
     TOP_FB_A0_REG = TOP_FB_LEFT1;
     TOP_FB_A1_REG = TOP_FB_LEFT2;
     

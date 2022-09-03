@@ -16,7 +16,7 @@ INCLUDE	= $(foreach dir, $(INCLUDES), -I$(CURDIR)/$(dir))
 
 ARCH	= -mcpu=mpcore -march=armv6k -mlittle-endian -mthumb-interwork
 ASFLAGS	= $(ARCH) $(COMMON_ARCH) $(INCLUDE)
-CFLAGS	= -Wall -Os -fno-builtin $(ARCH) $(INCLUDE) -fno-stack-protector
+CFLAGS	= -Wall -Os -fno-builtin $(ARCH) $(INCLUDE) -fno-stack-protector -D__LOGO__
 
 
 .PHONY: all clean copy
